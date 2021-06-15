@@ -28,7 +28,7 @@ public interface Proto extends Serializable {
      * 解码
      *
      * @param buf 读取
-     * @return eg. {@link InvokeProto}
+     * @return eg. {@link InvokeReqProto}
      */
     Proto decode(ByteBuf buf);
 }

@@ -23,7 +23,7 @@ public abstract class LandboatProto implements Proto {
         /**
          * 方法调用类型
          */
-        INVOKE("方法调用", (byte) 0b0001, InvokeProto.class);
+        INVOKE("方法调用", (byte) 0b0001, InvokeReqProto.class);
 
         String desc;
         byte type;

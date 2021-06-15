@@ -5,7 +5,7 @@ import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelPromise;
 import io.netty.handler.codec.MessageToMessageEncoder;
-import netty.proto.demo.InvokeProto;
+import netty.proto.demo.InvokeReqProto;
 
 import java.nio.charset.StandardCharsets;
 import java.util.List;
@@ -18,12 +18,12 @@ import java.util.List;
  * @author chen
  * @date 2021/5/3
  **/
-public class GsonEncoder extends MessageToMessageEncoder<InvokeProto> {
+public class GsonEncoder extends MessageToMessageEncoder<InvokeReqProto> {
 
 	private final Gson gson = new Gson();
 
 	@Override
-	protected void encode(ChannelHandlerContext ctx, InvokeProto msg, List<Object> out) throws Exception {
+	protected void encode(ChannelHandlerContext ctx, InvokeReqProto msg, List<Object> out) throws Exception {
 		// JSON 序列化
 		final String content = gson.toJson(msg);
 		// 获取内存

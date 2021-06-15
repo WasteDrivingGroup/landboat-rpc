@@ -9,7 +9,7 @@ import io.netty.handler.codec.LengthFieldBasedFrameDecoder;
 import io.netty.handler.codec.LengthFieldPrepender;
 import netty.client.AbstractNettyClientBootstrap;
 import netty.handler.DebugLogHandler;
-import netty.proto.demo.InvokeProto;
+import netty.proto.demo.InvokeReqProto;
 import netty.proto.decoder.GsonDecoder;
 import netty.proto.encoder.GsonEncoder;
 
@@ -58,7 +58,7 @@ public class ConsumerBootstrap extends AbstractNettyClientBootstrap {
 		final Scanner scanner = new Scanner(System.in);
 		while (scanner.hasNext()) {
 			final String s = scanner.nextLine();
-			channel.writeAndFlush(new InvokeProto().setServiceName(s));
+			channel.writeAndFlush(new InvokeReqProto().setServiceName(s));
 		}
 
 
