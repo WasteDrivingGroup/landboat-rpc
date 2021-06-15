@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.MessageToMessageDecoder;
+import netty.proto.demo.InvokeProto;
 
 import java.util.List;
 
@@ -17,11 +18,12 @@ import java.util.List;
  **/
 public class GsonDecoder extends MessageToMessageDecoder<ByteBuf> {
 
-    private final Gson gson = new Gson();
+	private final Gson gson = new Gson();
 
-    @Override
-    protected void decode(ChannelHandlerContext ctx, ByteBuf msg, List<Object> out) throws Exception {
-        byte[] bytes = new byte[msg.readableBytes()];
-        msg.readBytes(bytes);
-    }
+	@Override
+	protected void decode(ChannelHandlerContext ctx, ByteBuf msg, List<Object> out) throws Exception {
+		byte[] bytes = new byte[msg.readableBytes()];
+		msg.readBytes(bytes);
+		out.add(gson.fromJson(new String(bytes), InvokeProto.class));
+	}
 }

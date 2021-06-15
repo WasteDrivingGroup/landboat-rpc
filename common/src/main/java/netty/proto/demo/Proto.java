@@ -1,4 +1,4 @@
-package netty.proto.custom;
+package netty.proto.demo;
 
 import io.netty.buffer.ByteBuf;
 

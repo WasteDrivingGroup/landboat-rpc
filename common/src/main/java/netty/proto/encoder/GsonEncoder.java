@@ -2,11 +2,10 @@ package netty.proto.encoder;
 
 import com.google.gson.Gson;
 import io.netty.buffer.ByteBuf;
-import io.netty.buffer.PooledByteBufAllocator;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelPromise;
-import io.netty.handler.codec.MessageToMessageDecoder;
 import io.netty.handler.codec.MessageToMessageEncoder;
+import netty.proto.demo.InvokeProto;
 
 import java.nio.charset.StandardCharsets;
 import java.util.List;
@@ -19,18 +18,18 @@ import java.util.List;
  * @author chen
  * @date 2021/5/3
  **/
-//public class GsonEncoder extends MessageToMessageEncoder<SimpleProto> {
-//
-//    private final Gson gson = new Gson();
-//
-//    @Override
-//    protected void encode(ChannelHandlerContext ctx, SimpleProto msg, List<Object> out) throws Exception {
-//        // JSON 序列化
-//        final String content = gson.toJson(msg);
-//        // 获取内存
-//        final ByteBuf byteBuf = ctx.alloc().directBuffer();
-//        // 写入
-//        byteBuf.writeBytes(content.getBytes(StandardCharsets.UTF_8));
-//        ctx.writeAndFlush(byteBuf);
-//    }
-//}
+public class GsonEncoder extends MessageToMessageEncoder<InvokeProto> {
+
+	private final Gson gson = new Gson();
+
+	@Override
+	protected void encode(ChannelHandlerContext ctx, InvokeProto msg, List<Object> out) throws Exception {
+		// JSON 序列化
+		final String content = gson.toJson(msg);
+		// 获取内存
+		final ByteBuf byteBuf = ctx.alloc().directBuffer();
+		// 写入
+		byteBuf.writeBytes(content.getBytes(StandardCharsets.UTF_8));
+		out.add(byteBuf);
+	}
+}
