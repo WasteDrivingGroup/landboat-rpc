@@ -11,6 +11,7 @@ public class Consumer {
 		ConsumerBootstrap clent = new ConsumerBootstrap();
 		clent.start();
 		final TestService proxy = InvokeProxy.createProxy(TestService.class);
-		proxy.incr("Hello");
+		final Integer hello = proxy.incr("Hello");
+		System.out.println(hello);
 	}
 }

@@ -1,5 +1,6 @@
 package com.wastedrivinggroup.consumer.rpc;
 
+import com.google.gson.Gson;
 import com.wastedrivinggroup.consumer.netty.ChannelHolder;
 import com.wastedrivinggroup.consumer.netty.ServiceNameBuilder;
 import com.wastedrivinggroup.consumer.netty.proto.demo.InvokeReqProto;
@@ -18,19 +19,24 @@ public class InvokeProxy implements InvocationHandler {
 
 	private static final InvokeProxy INSTANCE = new InvokeProxy();
 
+	Gson gson = new Gson();
+
 	@Override
 	public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
 		final String methodName = method.getName();
-		//
 		if ("toString".equals(methodName) || "hashCode".equals(methodName) || "equals".equals(methodName)) {
 			return method.invoke(proxy, args);
 		}
-		ChannelHolder.getInstance().getChannel().writeAndFlush(wrapInvokeReq(method, args));
-		return 1;
+		final InvokeReqProto req = wrapInvokeReq(method, args);
+		ChannelHolder.getInstance().getChannel().writeAndFlush(req);
+		// 发送请求后在接收请求前应该阻塞当前线程
+		String res = ResponseBuffer.getResp(req.getInvokeId());
+		return gson.fromJson(res, method.getGenericReturnType());
 	}
 
 	private InvokeReqProto wrapInvokeReq(Method method, Object[] args) {
 		return new InvokeReqProto()
+				.setInvokeId(1L)
 				.setServiceName(ServiceNameBuilder.buildServiceName(method))
 				.setArgs(args);
 

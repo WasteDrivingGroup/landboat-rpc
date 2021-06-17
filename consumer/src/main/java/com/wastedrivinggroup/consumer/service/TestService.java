@@ -5,5 +5,5 @@ package com.wastedrivinggroup.consumer.service;
  * @date 2021/6/16
  **/
 public interface TestService {
-	int incr(String name);
+	Integer incr(String name);
 }

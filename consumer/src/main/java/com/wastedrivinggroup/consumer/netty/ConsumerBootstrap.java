@@ -2,6 +2,7 @@ package com.wastedrivinggroup.consumer.netty;
 
 import com.wastedrivinggroup.consumer.netty.client.AbstractNettyClientBootstrap;
 import com.wastedrivinggroup.consumer.netty.handler.DebugLogHandler;
+import com.wastedrivinggroup.consumer.netty.handler.ResponseReceiveHandler;
 import com.wastedrivinggroup.consumer.netty.proto.decoder.GsonDecoder;
 import com.wastedrivinggroup.consumer.netty.proto.demo.InvokeRespProto;
 import com.wastedrivinggroup.consumer.netty.proto.encoder.GsonEncoder;
@@ -39,6 +40,7 @@ public class ConsumerBootstrap extends AbstractNettyClientBootstrap {
 						// 对经过粘包和拆包处理之后的数据进行json反序列化，从而得到User对象
 						ch.pipeline().addLast(new GsonDecoder<>(InvokeRespProto.class));
 						ch.pipeline().addLast(new GsonEncoder());
+						ch.pipeline().addLast(new ResponseReceiveHandler());
 						// 对响应数据进行编码，主要是将User对象序列化为json
 						ch.pipeline().addLast(new DebugLogHandler());
 					}

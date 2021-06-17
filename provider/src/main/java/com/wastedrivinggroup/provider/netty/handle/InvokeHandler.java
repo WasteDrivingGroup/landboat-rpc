@@ -1,5 +1,6 @@
 package com.wastedrivinggroup.provider.netty.handle;
 
+import com.google.gson.Gson;
 import com.wastedrivinggroup.consumer.netty.proto.demo.InvokeReqProto;
 import com.wastedrivinggroup.consumer.netty.proto.demo.InvokeRespProto;
 import com.wastedrivinggroup.provider.service.ServiceDelegate;
@@ -17,6 +18,8 @@ import java.util.Arrays;
  **/
 @Slf4j
 public class InvokeHandler extends SimpleChannelInboundHandler<InvokeReqProto> {
+	Gson gson = new Gson();
+
 	@Override
 	protected void channelRead0(ChannelHandlerContext ctx, InvokeReqProto msg) throws Exception {
 		if (log.isInfoEnabled()) {
@@ -25,7 +28,7 @@ public class InvokeHandler extends SimpleChannelInboundHandler<InvokeReqProto> {
 		// 实际调用得到结果
 		final Object invoke = ServiceDelegate.invoke(msg.getServiceName(), msg.getArgs());
 		// 包装结果
-		ctx.writeAndFlush(new InvokeRespProto().setInvokeId(msg.getInvokeId()).setRet(invoke));
+		ctx.writeAndFlush(new InvokeRespProto().setInvokeId(msg.getInvokeId()).setRet(gson.toJson(invoke)));
 	}
 
 	@Override

@@ -33,6 +33,7 @@ public class InvokeRespProto {
 
 	/**
 	 * 正常返回
+	 * FIXME: 使用 Object 类型作为返回值，服务端传出为 Integer,但是客户端接收 gson 解码后为 Double,目前是直接以 String 传递返回结果,根据结果类型再次用 gson 解码
 	 */
-	private Object ret;
+	private String ret;
 }
