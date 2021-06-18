@@ -1,11 +1,11 @@
 package com.wastedrivinggroup.provider.netty;
 
-import com.wastedrivinggroup.consumer.netty.handler.DebugLogHandler;
-import com.wastedrivinggroup.consumer.netty.proto.decoder.GsonDecoder;
-import com.wastedrivinggroup.consumer.netty.proto.demo.InvokeReqProto;
-import com.wastedrivinggroup.consumer.netty.proto.encoder.GsonEncoder;
-import com.wastedrivinggroup.consumer.netty.server.AbstractNettyServerBootstrap;
-import com.wastedrivinggroup.consumer.netty.server.config.ServerConfig;
+import com.wastedrivinggroup.netty.handler.DebugLogHandler;
+import com.wastedrivinggroup.netty.proto.decoder.GsonDecoder;
+import com.wastedrivinggroup.netty.proto.demo.InvokeReqProto;
+import com.wastedrivinggroup.netty.proto.encoder.GsonEncoder;
+import com.wastedrivinggroup.netty.server.AbstractNettyServerBootstrap;
+import com.wastedrivinggroup.netty.server.config.ServerConfig;
 import com.wastedrivinggroup.provider.netty.handle.InvokeHandler;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.socket.nio.NioServerSocketChannel;

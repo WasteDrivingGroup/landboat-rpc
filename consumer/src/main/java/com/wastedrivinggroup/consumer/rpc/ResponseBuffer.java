@@ -19,7 +19,6 @@ public class ResponseBuffer {
 	private static final ConcurrentHashMap<Long, Thread> reqBuffer = new ConcurrentHashMap<>();
 	private static final ConcurrentHashMap<Long, String> respBuffer = new ConcurrentHashMap<>();
 
-
 	public static String getResp(Long invokeId) throws InterruptedException {
 		// 如果已经有响应了，直接返回
 		if (respBuffer.containsKey(invokeId)) {

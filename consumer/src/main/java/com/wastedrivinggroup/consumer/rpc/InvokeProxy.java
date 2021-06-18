@@ -1,9 +1,9 @@
 package com.wastedrivinggroup.consumer.rpc;
 
 import com.google.gson.Gson;
-import com.wastedrivinggroup.consumer.netty.ChannelHolder;
-import com.wastedrivinggroup.consumer.netty.ServiceNameBuilder;
-import com.wastedrivinggroup.consumer.netty.proto.demo.InvokeReqProto;
+import com.wastedrivinggroup.netty.ChannelHolder;
+import com.wastedrivinggroup.netty.ServiceNameBuilder;
+import com.wastedrivinggroup.netty.proto.demo.InvokeReqProto;
 import lombok.extern.slf4j.Slf4j;
 
 import java.lang.reflect.InvocationHandler;
@@ -27,7 +27,9 @@ public class InvokeProxy implements InvocationHandler {
 		if ("toString".equals(methodName) || "hashCode".equals(methodName) || "equals".equals(methodName)) {
 			return method.invoke(proxy, args);
 		}
+		// 封装请求
 		final InvokeReqProto req = wrapInvokeReq(method, args);
+		// 发送请求
 		ChannelHolder.getInstance().getChannel().writeAndFlush(req);
 		// 发送请求后在接收请求前应该阻塞当前线程
 		String res = ResponseBuffer.getResp(req.getInvokeId());

@@ -1,8 +1,8 @@
 package com.wastedrivinggroup.provider.netty.handle;
 
 import com.google.gson.Gson;
-import com.wastedrivinggroup.consumer.netty.proto.demo.InvokeReqProto;
-import com.wastedrivinggroup.consumer.netty.proto.demo.InvokeRespProto;
+import com.wastedrivinggroup.netty.proto.demo.InvokeReqProto;
+import com.wastedrivinggroup.netty.proto.demo.InvokeRespProto;
 import com.wastedrivinggroup.provider.service.ServiceDelegate;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;

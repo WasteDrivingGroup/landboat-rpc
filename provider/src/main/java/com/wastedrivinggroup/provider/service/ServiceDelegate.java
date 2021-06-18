@@ -1,7 +1,7 @@
 package com.wastedrivinggroup.provider.service;
 
 import com.wastedrivinggroup.provider.netty.handle.InvokeHandler;
-import com.wastedrivinggroup.consumer.netty.exception.ServiceNotFoundException;
+import com.wastedrivinggroup.netty.exception.ServiceNotFoundException;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Objects;

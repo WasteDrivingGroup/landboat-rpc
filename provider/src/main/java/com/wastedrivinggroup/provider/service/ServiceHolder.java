@@ -1,6 +1,6 @@
 package com.wastedrivinggroup.provider.service;
 
-import com.wastedrivinggroup.consumer.netty.ServiceNameBuilder;
+import com.wastedrivinggroup.netty.ServiceNameBuilder;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
@@ -71,11 +71,11 @@ public class ServiceHolder {
 			final ReflectService oldService = SERVICE_MAP.putIfAbsent(serviceName, targetService);
 			if (oldService != null) {
 				if (log.isWarnEnabled()) {
-					log.warn("repeat load same service ,service name:{}", serviceName);
+					log.warn("repeat load same com.wastedrivinggroup.service ,com.wastedrivinggroup.service name:{}", serviceName);
 				}
 			} else {
 				if (log.isInfoEnabled()) {
-					log.info("load new service,service name:{}", serviceName);
+					log.info("load new com.wastedrivinggroup.service,com.wastedrivinggroup.service name:{}", serviceName);
 				}
 			}
 		}
