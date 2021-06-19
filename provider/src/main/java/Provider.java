@@ -1,6 +1,7 @@
 import com.wastedrivinggroup.provider.netty.ProviderBootstrap;
 import com.wastedrivinggroup.provider.service.ServiceHolder;
 import com.wastedrivinggroup.provider.service.TestService;
+import com.wastedrivinggroup.service.naming.ServiceRegisterChain;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -16,5 +17,6 @@ public class Provider {
 		ServiceHolder.getInstance().loadService(TestService.class);
 		ProviderBootstrap server = new ProviderBootstrap();
 		server.start();
+		ServiceRegisterChain.getInstance().registered("TEST");
 	}
 }

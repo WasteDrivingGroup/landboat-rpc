@@ -5,7 +5,6 @@ import com.wastedrivinggroup.netty.proto.decoder.GsonDecoder;
 import com.wastedrivinggroup.netty.proto.demo.InvokeReqProto;
 import com.wastedrivinggroup.netty.proto.encoder.GsonEncoder;
 import com.wastedrivinggroup.netty.server.AbstractNettyServerBootstrap;
-import com.wastedrivinggroup.netty.server.config.ServerConfig;
 import com.wastedrivinggroup.provider.netty.handle.InvokeHandler;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
@@ -18,12 +17,6 @@ import io.netty.handler.codec.LengthFieldPrepender;
  * @date 2021/4/16
  **/
 public class ProviderBootstrap extends AbstractNettyServerBootstrap {
-
-	@Override
-	protected ServerConfig getConfig() {
-		// TODO: 先采用默认的
-		return new ServerConfig();
-	}
 
 	@Override
 	protected ChannelInitializer<NioServerSocketChannel> serverChannelInitializer() {

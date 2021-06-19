@@ -1,6 +1,4 @@
-package com.wastedrivinggroup.service.naming.register;
-
-import com.wastedrivinggroup.service.naming.RegisterPolicy;
+package com.wastedrivinggroup.service.naming;
 
 import java.util.HashSet;
 

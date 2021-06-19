@@ -22,5 +22,11 @@
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/com.orbitz.consul/consul-client -->
+        <dependency>
+            <groupId>com.orbitz.consul</groupId>
+            <artifactId>consul-client</artifactId>
+            <version>1.5.2</version>
+        </dependency>
     </dependencies>
 </project>
