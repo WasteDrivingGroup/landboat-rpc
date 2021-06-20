@@ -1,6 +1,7 @@
 package com.wastedrivinggroup.service.naming;
 
 import java.util.HashSet;
+import java.util.Set;
 
 /**
  * @author chen
@@ -8,7 +9,7 @@ import java.util.HashSet;
  **/
 public abstract class AbstractRegisterPolicy implements RegisterPolicy {
 
-	private HashSet<String> registeredService;
+	protected Set<String> registeredService;
 
 	public AbstractRegisterPolicy() {
 		registeredService = new HashSet<>();

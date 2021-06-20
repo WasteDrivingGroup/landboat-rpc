@@ -2,6 +2,7 @@ package com.wastedrivinggroup.netty.server;
 
 import com.wastedrivinggroup.netty.RpcBootstrap;
 import com.wastedrivinggroup.netty.server.config.NettyServerConfig;
+import com.wastedrivinggroup.utils.GracefulShutdownChain;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelInitializer;
@@ -58,6 +59,14 @@ public abstract class AbstractNettyServerBootstrap implements RpcBootstrap {
 				if (log.isInfoEnabled()) {
 					log.info("rpc server start success.");
 				}
+				GracefulShutdownChain.addShutdown(() -> {
+					try {
+						future.channel().close().sync();
+					} catch (InterruptedException e) {
+						log.warn("server channel close failure");
+						// NOOP
+					}
+				});
 			}
 		});
 	}

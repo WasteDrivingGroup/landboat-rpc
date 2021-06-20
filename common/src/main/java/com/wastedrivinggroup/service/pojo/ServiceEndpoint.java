@@ -1,5 +1,6 @@
 package com.wastedrivinggroup.service.pojo;
 
+import com.orbitz.consul.model.health.Service;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,8 +16,12 @@ import lombok.experimental.Accessors;
 @NoArgsConstructor
 @AllArgsConstructor
 @Accessors(chain = true)
-public class ServiceAddress {
-	private String ip;
+public class ServiceEndpoint {
+	private String host;
 
 	private Integer port;
+
+	public static ServiceEndpoint tran2(Service service) {
+		return new ServiceEndpoint(service.getAddress(), service.getPort());
+	}
 }

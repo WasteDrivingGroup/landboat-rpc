@@ -4,6 +4,8 @@ import com.google.common.net.HostAndPort;
 import com.orbitz.consul.AgentClient;
 import com.orbitz.consul.Consul;
 import com.orbitz.consul.HealthClient;
+import com.wastedrivinggroup.utils.GracefulShutdown;
+import com.wastedrivinggroup.utils.GracefulShutdownChain;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Collections;
@@ -17,6 +19,7 @@ import java.util.stream.Collectors;
  **/
 @Slf4j
 public class ConsulClientHolder {
+
 	private static ConcurrentHashMap<HostAndPort, Consul> consulMap;
 
 	static {
@@ -24,6 +27,16 @@ public class ConsulClientHolder {
 		final HostAndPort hostAndPort = HostAndPort.fromString("localhost:8500");
 		final Consul build = Consul.builder().withHostAndPort(hostAndPort).withPing(false).build();
 		consulMap.put(hostAndPort, build);
+	}
+
+	private ConsulClientHolder() {
+		GracefulShutdownChain.addShutdown(new GracefulShutdown() {
+			@Override
+			public void clear() {
+				log.info("关闭Consul连接");
+				consulMap.values().forEach(Consul::destroy);
+			}
+		});
 	}
 
 	public static boolean existClient() {
@@ -60,6 +73,15 @@ public class ConsulClientHolder {
 
 	public static AgentClient getAgentClient(String url) {
 		return getAgentClient(HostAndPort.fromString(url));
+	}
+
+	public static List<HealthClient> getHealthClient() {
+		if (consulMap.isEmpty()) {
+			return Collections.emptyList();
+		}
+		return consulMap.values().stream()
+				.map(Consul::healthClient)
+				.collect(Collectors.toList());
 	}
 
 	public static HealthClient getHealthClient(String ip, int port) {

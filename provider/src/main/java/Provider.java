@@ -14,9 +14,12 @@ import lombok.extern.slf4j.Slf4j;
 public class Provider {
 
 	public static void main(String[] args) throws InterruptedException {
+		// 加载服务列表
 		ServiceHolder.getInstance().loadService(TestService.class);
+		// 启动 Netty 服务端
 		ProviderBootstrap server = new ProviderBootstrap();
 		server.start();
-		ServiceRegisterChain.getInstance().registered("TEST");
+		// 注册服务
+		ServiceRegisterChain.getInstance().registered("TestIncr");
 	}
 }

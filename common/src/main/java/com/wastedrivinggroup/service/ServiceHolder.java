@@ -1,6 +1,6 @@
 package com.wastedrivinggroup.service;
 
-import com.wastedrivinggroup.service.pojo.Service;
+import com.wastedrivinggroup.service.pojo.ServiceEndpoint;
 
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -13,5 +13,5 @@ import java.util.concurrent.ConcurrentHashMap;
  * @date 2021-06-18
  **/
 public class ServiceHolder {
-	private static ConcurrentHashMap<String, Service> services = new ConcurrentHashMap<>();
+	private static ConcurrentHashMap<String, ServiceEndpoint> services = new ConcurrentHashMap<>();
 }
