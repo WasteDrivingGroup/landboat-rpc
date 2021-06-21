@@ -70,7 +70,7 @@ public class ConsulServiceRegister extends AbstractRegisterPolicy {
 			return;
 		}
 		for (AgentClient agentClient : agentClients) {
-			agentClient.deregister(serviceName);
+			agentClient.deregister(generateInstanceId());
 		}
 		registeredService.remove(serviceName);
 	}
